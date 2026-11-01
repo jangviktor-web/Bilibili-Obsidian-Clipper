@@ -7,54 +7,30 @@
 推荐官方插件市场下载：[Chrome](https://chromewebstore.google.com/detail/jokophbofiphenlplmohabdcmalcbenl?utm_source=item-share-cb) · [Edge](https://microsoftedge.microsoft.com/addons/detail/fbeeapnjdjgacilaobonekidbfjcmdjo) · [Firefox](https://addons.mozilla.org/addon/bilibili-obsidian-clipper/)
 
 在 B 站视频页抓取字幕，预览后可复制 Markdown、下载字幕文件，并一键写入 Obsidian（Local REST API）。
+**v1.2.0 新增**：合集 / 多 P / 收藏夹字幕批量下载，一次抓完整季，打包 ZIP 或批量写入 Obsidian。
 
-> 注意：仅支持获取“有字幕轨”的 B 站视频字幕（播放器里有「字幕」选项，通常表示作者上传了外挂字幕或平台提供了 AI 字幕）；没有字幕轨的视频无法获取字幕。
+> 注意：仅支持获取“有字幕轨”的 B 站视频字幕（播放器里有「字幕」选项，通常表示作者上传了外挂字幕或平台提供了 AI 字幕）；没有字幕轨的视频无法获取字幕。AI 字幕需要登录 B 站后才能获取。
 
 ## 功能
 
+### 基础功能（单视频）
+
 - B 站视频字幕抓取（自动识别当前分 P）
-- **合集 / 多 P 字幕批量下载（v1.2.0+，见下文）**
 - 字幕预览、复制 Markdown
 - 下载字幕文件（`srt/txt`）
 - 保存到 Obsidian（Local REST API）
 
-## 合集 / 多 P 字幕批量下载（v1.2.0+）
+### 批量下载（v1.2.0+）
 
-新增独立的批量下载管理页，可一次性抓取整个合集、收藏夹或多 P 视频的字幕。
-
-### 支持的输入
-
-- 单视频 / 多 P 链接：`https://www.bilibili.com/video/BVxxxx/?p=2`
-- UP 主合集：`https://space.bilibili.com/<mid>/channel/collectiondetail?sid=<合集id>`
-- 番剧 / 课程：`ep` 链接或 `ss` 链接
-- 收藏夹：`https://space.bilibili.com/<mid>/favlist?fid=<收藏夹id>`
-- 支持一次粘贴多行，每行一个链接
-
-### 使用步骤
-
-1. 在任意 B 站视频页点击扩展图标，选择「批量下载合集字幕」（或直接打开扩展的 `batch.html` 页面）
-2. 粘贴链接并点击「解析列表」，勾选需要下载的视频
-3. 可选：导出格式（SRT / TXT / Markdown）、字幕语言、文件名规则、并发数与请求间隔
-4. 点击「开始抓取字幕」，等待进度完成（无字幕 / 失败的条目可单独重试）
-5. 点击「下载 ZIP」导出打包文件（附带 `00-索引.md` 索引），或「写入 Obsidian」批量落盘
-
-### 说明
-
-- 抓取完全复用当前浏览器的 B 站登录态，不经过任何第三方服务器；AI 字幕需要登录后才能获取
-- 并发数 / 请求间隔可在页面里调整，遇到风控（-352 / -412）时请调低并发、拉长间隔后重试失败项
-- 「写入 Obsidian」复用设置页中的 Local REST API 配置，默认跳过已存在的笔记
-
-### 阅读视图（v1.0.18+）
-
-沉浸式布局，支持排版调整、主题切换、字幕同步等。
-
-> 稍后再看页面的阅读视图体验尚不完善，推荐在普通视频页使用。
-
-### AI 侧边栏（v1.1.0+）
-
-支持围绕当前视频字幕进行轻量对话，也可在普通网页中作为通用 AI 对话侧边栏使用。
-
-内置历史对话、预设提示词、模型切换等能力，适合快速总结、整理与提炼视频内容。
+| 能力 | 说明 |
+| --- | --- |
+| 批量解析 | 粘贴合集、多 P、收藏夹、番剧或 BV 链接（支持多行），自动解析全部视频 |
+| 导出格式 | SRT / TXT / Markdown（带 frontmatter，与单视频保存格式一致） |
+| 打包下载 | 零依赖 ZIP（UTF-8 文件名），附带 `00-索引.md` 汇总表，方便检索 |
+| 批量写入 Obsidian | 复用设置页的 Local REST API 配置，默认跳过已存在笔记 |
+| 进度与重试 | 逐条进度与状态（成功 / 无字幕 / 失败），失败单条重试，错误原因直接显示在行内 |
+| 风控自适应 | 遇到 -352/-412 自动退避重试并放慢请求节奏，成功后逐步恢复 |
+| 可调参数 | 并发数（1–5）、请求间隔（150–1500ms）、字幕语言、文件名规则（`001-标题` / `标题` / `序号`） |
 
 ## 功能图片演示
 
@@ -64,38 +40,115 @@
 
 ## 安装方式
 
-### 升级说明
+### 从 Release 下载（推荐）
 
-- Chrome / Edge：如果是从 GitHub 手动下载安装包升级，建议直接替换原扩展目录中的文件，并在扩展管理页点击“重新加载”；不要先移除旧扩展，否则本地设置、AI 历史对话和已保存的 Key 可能会丢失。
-- Firefox：当前为“临时加载附加组件”方式，更适合开发调试使用；重新移除并加载新版本后，本地设置和 AI 历史对话可能不会保留。
+在 [Releases](https://github.com/haixiong1997/Bilibili-Obsidian-Clipper/releases) 页面按浏览器下载对应包：
 
-### Chrome / Edge
+| 浏览器 | 包名 | 说明 |
+| --- | --- | --- |
+| Chrome | `*-chrome.zip` | MV3 service worker |
+| Edge | `*-edge.zip` | 与 Chrome 相同内核，内附 `EDGE-INSTALL.txt` 安装说明（也可直接用 chrome 包） |
+| Firefox | `*-firefox.zip` | 使用 `background.scripts` 与 `sidebar_action` |
 
-1. 在 GitHub 的 `Releases` 页面下载最新的 `*-chrome.zip` 包（Edge 用户下载 `*-edge.zip`，内附 `EDGE-INSTALL.txt` 安装说明；Edge 亦可直接使用 `*-chrome.zip`）
-2. 解压到任意本地目录
-3. 打开扩展管理页：
-   - Chrome：`chrome://extensions/`
-   - Edge：`edge://extensions/`
-4. 开启"开发者模式"
-5. 点击"加载已解压的扩展程序"
-6. 选择解压后的扩展目录
+### Chrome / Edge（开发者模式加载）
+
+1. 下载并解压对应 zip 到任意本地目录
+2. 打开扩展管理页：Chrome `chrome://extensions/`，Edge `edge://extensions/`
+3. 开启「开发者模式」（Edge 为左下角「开发人员模式」）
+4. 点击「加载已解压的扩展程序」，选择解压后的目录
+5. 更新版本时直接替换文件后点击扩展卡片上的「重新加载」即可，无需删除重装
 
 ### Firefox
 
-1. 在 GitHub 的 `Releases` 页面下载最新的 `*-firefox.zip` 包
-2. 解压到任意本地目录
-3. 打开 Firefox 附加组件管理页：`about:addons`
-4. 点击右上角齿轮图标 → "调试附加组件"
-5. 点击"临时加载附加组件..."
-6. 选择解压后的文件夹中的 `manifest.json` 文件
+1. 下载解压 `*-firefox.zip`
+2. 打开 `about:addons` → 右上角齿轮 → 「调试附加组件」
+3. 「临时加载附加组件...」→ 选择解压目录中的 `manifest.json`
+
+> Firefox 为临时加载方式，更适合开发调试；重新加载后本地设置可能不会保留。
+
+### 升级说明
+
+- 从 GitHub 手动升级时，建议直接替换原扩展目录中的文件并在扩展管理页「重新加载」；不要先移除旧扩展，否则本地设置、AI 历史对话和已保存的 Key 可能丢失。
+- 建议先在本地测试确认无误，再替换日常使用的扩展版本；修改源码前保留一份原始版本方便回退。
+
+## 使用方式
+
+### 单视频保存
+
+1. 打开任意 B 站视频页并点击扩展图标
+2. 面板会自动抓取并展示字幕
+3. 按需点击 `刷新 / 复制 / 下载 / 保存到 Obsidian`
+
+### 批量下载合集 / 多 P 字幕
+
+1. **入口**：在 B 站视频页点击扩展图标 → 「批量下载合集字幕」（会自动带上当前视频链接），或直接打开扩展的 `batch.html` 页面
+2. **粘贴链接** → 点击「解析列表」，勾选需要下载的视频
+
+   支持的链接类型：
+
+   | 类型 | 示例 |
+   | --- | --- |
+   | 单视频 / 多 P | `https://www.bilibili.com/video/BVxxxx/?p=2` |
+   | UP 主合集 | `https://space.bilibili.com/<mid>/channel/collectiondetail?sid=<id>` |
+   | 番剧 / 课程 | `ep` 或 `ss` 链接 |
+   | 收藏夹 | `https://space.bilibili.com/<mid>/favlist?fid=<id>` |
+
+3. **选择选项**：导出格式、字幕语言（默认优先中文，含 AI 字幕）、文件名规则、并发数与请求间隔
+4. **开始抓取**：等待进度完成；无字幕 / 失败的条目可单独重试
+5. **导出**：点击「下载 ZIP」或「写入 Obsidian」
+
+### 稳定性建议
+
+- 批量抓取每个视频需要 2 个请求（字幕轨道 + 字幕正文），合集量大时建议 **并发 1–2、间隔 800ms+**
+- 若出现「失败」且错误包含 `-352` / `-412`（风控）：调低并发、加大间隔，等几分钟后点「重试失败项」
+- 66P 级别的合集全量抓取约需 5–15 分钟（取决于并发与间隔设置）
+
+## Obsidian 配置
+
+1. 在 Obsidian 社区插件市场安装并启用 `Local REST API with MCP`
+2. 在插件设置中勾选 `Enable Non-encrypted (HTTP) Server`
+3. 复制插件页面里的 API Key
+4. 在扩展设置页填写 `Local REST API 地址`、`API Key`、`笔记目录`
+
+批量写入时，笔记路径为 `笔记目录/文件名.md`，同名笔记默认跳过（不覆盖）。
+
+## 阅读视图（v1.0.18+）
+
+沉浸式布局，支持排版调整、主题切换、字幕同步等。
+
+> 稍后再看页面的阅读视图体验尚不完善，推荐在普通视频页使用。
+
+## AI 侧边栏（v1.1.0+）
+
+支持围绕当前视频字幕进行轻量对话，也可在普通网页中作为通用 AI 对话侧边栏使用。
+
+内置历史对话、预设提示词、模型切换等能力，适合快速总结、整理与提炼视频内容。
 
 ## 项目结构
 
 - `README.md` / `LICENSE`：项目说明与许可证
-- `extension/`：插件源码（manifest、js、css、icons）
-  - `batch-core.js`：批量下载核心（合集解析、并发队列、ZIP 打包）
+- `extension/`：插件源码
+  - `manifest.json`：MV3 清单（Chrome/Edge 共用，构建时生成 Firefox 变体）
+  - `content.js` / `content.css`：视频页内面板与阅读视图
+  - `popup.html` / `popup.js`：扩展弹窗（含批量下载入口）
+  - `background.js`：后台（字幕抓取、Obsidian 写入、AI 代理、批量任务调度）
+  - `batch-core.js`：批量下载核心（链接解析、合集发现、并发队列、ZIP 打包）
   - `batch.html` / `batch.js` / `batch.css`：批量下载管理页
-  - `background.js`：后台（含批量任务调度与消息路由）
+  - `sidepanel.*` / `ai/`：AI 侧边栏
+  - `options.*`：设置页
+- `scripts/build_release.py`：一键构建 Chrome / Edge / Firefox 三平台发布包
+- `release/`：构建产物（本地生成，不入库）
+
+## 开发与构建
+
+```bash
+# 构建三平台发布包（输出到 release/）
+python3 scripts/build_release.py
+```
+
+- Chrome / Edge 变体：MV3 `service_worker`，核心模块经 `importScripts` 加载
+- Firefox 变体：`background.scripts` + `sidebar_action`，并隐藏播放器 AI 快捷按钮设置
+- 本地调试：直接加载 `extension/` 目录即可，无需构建
 
 ## 用自己的 Agent 二次修改
 
@@ -112,20 +165,22 @@
 4. 修改完成后，在浏览器扩展管理页选择 `extension/` 文件夹进行本地加载
 5. 打开 B 站视频页测试字幕抓取、AI 对话和 Obsidian 写入是否正常
 
-建议先在本地测试确认无误，再替换日常使用的扩展版本。修改源码前也建议保留一份原始版本，方便出现问题时回退。
+## 常见问题（FAQ）
 
-## Obsidian 配置
+**Q：抓取结果显示「无字幕」？**
+该视频没有字幕轨（外挂字幕或 AI 字幕都没有）。播放器里没有「字幕」按钮的视频无法获取字幕。
 
-1. 在 Obsidian 社区插件市场安装并启用 `Local REST API with MCP`
-2. 在插件设置中勾选 `Enable Non-encrypted (HTTP) Server`
-3. 复制插件页面里的 API Key
-4. 在扩展设置页填写 `Local REST API 地址`、`API Key`、`笔记目录`
+**Q：AI 字幕抓不到？**
+AI 字幕需要登录 B 站。请在浏览器登录后重试；扩展完全复用你自己的登录态。
 
-## 使用方式
+**Q：批量抓取大量「失败」，错误含 `-352` / `-412`？**
+触发了 B 站风控。调低并发到 1、间隔调到 1500ms，等待几分钟后点「重试失败项」。扩展在遇到风控时也会自动退避重试。
 
-1. 打开任意 B 站视频页并点击扩展图标
-2. 面板会自动抓取并展示字幕
-3. 按需点击 `刷新 / 复制 / 下载 / 保存到 Obsidian`
+**Q：合集里部分视频没有字幕？**
+每个视频独立判断，无字幕条目会标黄显示，不影响其他视频导出。
+
+**Q：ZIP 里的 `00-索引.md` 是什么？**
+导出汇总表（序号 / 标题 / BV 号 / 字幕语言 / 文件名），方便在笔记软件里建立索引。
 
 ## 视频教程
 
