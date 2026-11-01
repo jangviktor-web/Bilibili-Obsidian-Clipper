@@ -1,100 +1,91 @@
-# Bilibili Obsidian Clipper｜一键保存B站字幕
+<div align="center">
 
-[![GitHub all releases downloads](https://img.shields.io/github/downloads/haixiong1997/Bilibili-Obsidian-Clipper/total?style=flat-square&logo=github&label=downloads)](https://github.com/haixiong1997/Bilibili-Obsidian-Clipper/releases)
-[![Chrome Web Store users](https://img.shields.io/chrome-web-store/users/jokophbofiphenlplmohabdcmalcbenl?style=flat-square&logo=google-chrome&logoColor=white&label=chrome)](https://chromewebstore.google.com/detail/jokophbofiphenlplmohabdcmalcbenl)
-[![GitHub release](https://img.shields.io/github/v/release/haixiong1997/Bilibili-Obsidian-Clipper?style=flat-square&label=version)](https://github.com/haixiong1997/Bilibili-Obsidian-Clipper/releases)
+# 📺 Bilibili Obsidian Clipper
 
-推荐官方插件市场下载：[Chrome](https://chromewebstore.google.com/detail/jokophbofiphenlplmohabdcmalcbenl?utm_source=item-share-cb) · [Edge](https://microsoftedge.microsoft.com/addons/detail/fbeeapnjdjgacilaobonekidbfjcmdjo) · [Firefox](https://addons.mozilla.org/addon/bilibili-obsidian-clipper/)
+**在 B 站视频页抓取字幕 · 一键保存到 Obsidian · 整季合集批量下载**
 
-在 B 站视频页抓取字幕，预览后可复制 Markdown、下载字幕文件，并一键写入 Obsidian（Local REST API）。
-**v1.2.0 新增**：合集 / 多 P / 收藏夹字幕批量下载，一次抓完整季，打包 ZIP 或批量写入 Obsidian。
+一键抓取视频字幕为 Markdown / SRT / TXT，支持合集、多 P、收藏夹批量打包导出。
+所有数据仅通过你自己的浏览器登录态获取，**不经过任何第三方服务器**。
 
-> 注意：仅支持获取“有字幕轨”的 B 站视频字幕（播放器里有「字幕」选项，通常表示作者上传了外挂字幕或平台提供了 AI 字幕）；没有字幕轨的视频无法获取字幕。AI 字幕需要登录 B 站后才能获取。
+[![Release](https://img.shields.io/github/v/release/jangviktor-web/Bilibili-Obsidian-Clipper?style=for-the-badge&label=%E4%B8%8B%E8%BD%BD)](https://github.com/jangviktor-web/Bilibili-Obsidian-Clipper/releases)
+[![Chrome Web Store users](https://img.shields.io/chrome-web-store/users/jokophbofiphenlplmohabdcmalcbenl?style=for-the-badge&logo=googlechrome&logoColor=white&label=Chrome%E7%94%A8%E6%88%B7)](https://chromewebstore.google.com/detail/jokophbofiphenlplmohabdcmalcbenl)
+[![License](https://img.shields.io/github/license/haixiong1997/Bilibili-Obsidian-Clipper?style=for-the-badge&label=License)](./LICENSE)
+[![Manifest V3](https://img.shields.io/badge/Manifest-V3-8a70f5?style=for-the-badge)](./extension/manifest.json)
 
-## 功能
+**安装**：[Chrome 商店](https://chromewebstore.google.com/detail/jokophbofiphenlplmohabdcmalcbenl) · [Edge 商店](https://microsoftedge.microsoft.com/addons/detail/fbeeapnjdjgacilaobonekidbfjcmdjo) · [Firefox 商店](https://addons.mozilla.org/addon/bilibili-obsidian-clipper/) · [离线包 ⬇](#-快速开始)
 
-### 基础功能（单视频）
+</div>
 
-- B 站视频字幕抓取（自动识别当前分 P）
-- 字幕预览、复制 Markdown
-- 下载字幕文件（`srt/txt`）
-- 保存到 Obsidian（Local REST API）
+<br />
 
-### 批量下载（v1.2.0+）
+> [!NOTE]
+> 仅支持获取**有字幕轨**的视频（播放器有「字幕」按钮：作者上传的外挂字幕或平台 AI 字幕）。
+> AI 字幕需要登录 B 站后才能获取。
 
-| 能力 | 说明 |
-| --- | --- |
-| 批量解析 | 粘贴合集、多 P、收藏夹、番剧或 BV 链接（支持多行），自动解析全部视频 |
-| 导出格式 | SRT / TXT / Markdown（带 frontmatter，与单视频保存格式一致） |
-| 打包下载 | 零依赖 ZIP（UTF-8 文件名），附带 `00-索引.md` 汇总表，方便检索 |
-| 批量写入 Obsidian | 复用设置页的 Local REST API 配置，默认跳过已存在笔记 |
-| 进度与重试 | 逐条进度与状态（成功 / 无字幕 / 失败），失败单条重试，错误原因直接显示在行内 |
-| 风控自适应 | 遇到 -352/-412 自动退避重试并放慢请求节奏，成功后逐步恢复 |
-| 可调参数 | 并发数（1–5）、请求间隔（150–1500ms）、字幕语言、文件名规则（`001-标题` / `标题` / `序号`） |
+## ✨ 功能亮点
 
-### 批量下载界面预览
-
-粘贴合集链接，一键解析出全部视频并勾选：
-
-![批量下载 · 解析列表](docs/images/batch-list.png)
-
-抓取完成：逐条显示状态与导出文件名，统计一目了然：
-
-![批量下载 · 抓取完成](docs/images/batch-done.png)
-
-## 功能图片演示
-
-![Bilibili Obsidian Clipper 功能演示](docs/images/feature-demo-v2.png)
-
-![Bilibili Obsidian Clipper AI 侧边栏演示](docs/images/33.png)
-
-## 安装方式
-
-### 从 Release 下载（推荐）
-
-在 [Releases](https://github.com/haixiong1997/Bilibili-Obsidian-Clipper/releases) 页面按浏览器下载对应包：
-
-| 浏览器 | 包名 | 说明 |
+| | 功能 | 说明 |
 | --- | --- | --- |
-| Chrome | `*-chrome.zip` | MV3 service worker |
-| Edge | `*-edge.zip` | 与 Chrome 相同内核，内附 `EDGE-INSTALL.txt` 安装说明（也可直接用 chrome 包） |
-| Firefox | `*-firefox.zip` | 使用 `background.scripts` 与 `sidebar_action` |
+| 🎯 | **单视频抓取** | 打开视频页自动识别当前分 P，预览后复制 Markdown / 下载 SRT / TXT |
+| 📚 | **合集批量下载** | UP 主合集、多 P、收藏夹、番剧一次抓完整季，`v1.2.0+` |
+| 📦 | **ZIP 打包导出** | 零依赖打包（UTF-8 中文文件名），附带 `00-索引.md` 汇总表 |
+| 📝 | **Markdown 笔记** | 带 frontmatter（标题 / BV 号 / UP 主 / 语言），与 Obsidian 无缝衔接 |
+| 🗄 | **批量写入 Obsidian** | 复用 Local REST API 配置，同名笔记自动跳过 |
+| 🛡 | **风控自适应** | 遇到 -352/-412 自动退避重试、放慢节奏，失败单条重试 |
+| 🎨 | **阅读视图** | 沉浸式排版，主题 / 字号 / 行距可调，字幕同步 |
+| 🤖 | **AI 侧边栏** | 围绕当前字幕对话：摘要、章节整理、带时间轴笔记 |
 
-### Chrome / Edge（开发者模式加载）
+## 📸 界面预览
 
-1. 下载并解压对应 zip 到任意本地目录
-2. 打开扩展管理页：Chrome `chrome://extensions/`，Edge `edge://extensions/`
-3. 开启「开发者模式」（Edge 为左下角「开发人员模式」）
-4. 点击「加载已解压的扩展程序」，选择解压后的目录
-5. 更新版本时直接替换文件后点击扩展卡片上的「重新加载」即可，无需删除重装
+<div align="center">
 
-### Firefox
+**解析合集，勾选要下载的视频**
 
-1. 下载解压 `*-firefox.zip`
-2. 打开 `about:addons` → 右上角齿轮 → 「调试附加组件」
-3. 「临时加载附加组件...」→ 选择解压目录中的 `manifest.json`
+<img src="docs/images/batch-list.png" width="720" alt="批量下载·解析列表" />
 
-> Firefox 为临时加载方式，更适合开发调试；重新加载后本地设置可能不会保留。
+**抓取完成，逐条显示状态与导出文件名**
 
-### 升级说明
+<img src="docs/images/batch-done.png" width="720" alt="批量下载·抓取完成" />
 
-- 从 GitHub 手动升级时，建议直接替换原扩展目录中的文件并在扩展管理页「重新加载」；不要先移除旧扩展，否则本地设置、AI 历史对话和已保存的 Key 可能丢失。
-- 建议先在本地测试确认无误，再替换日常使用的扩展版本；修改源码前保留一份原始版本方便回退。
+</div>
 
-## 使用方式
+## 🚀 快速开始
+
+### 方式一：插件商店（推荐）
+
+<div align="center">
+
+[<img src="https://img.shields.io/badge/Chrome-商店-4285F4?logo=googlechrome&logoColor=white" height="34">](https://chromewebstore.google.com/detail/jokophbofiphenlplmohabdcmalcbenl)
+[<img src="https://img.shields.io/badge/Edge-商店-0078D7?logo=microsoftedge&logoColor=white" height="34">](https://microsoftedge.microsoft.com/addons/detail/fbeeapnjdjgacilaobonekidbfjcmdjo)
+[<img src="https://img.shields.io/badge/Firefox-商店-FF7139?logo=firefoxbrowser&logoColor=white" height="34">](https://addons.mozilla.org/addon/bilibili-obsidian-clipper/)
+
+</div>
+
+### 方式二：离线包（开发者模式加载）
+
+从 [Releases](https://github.com/jangviktor-web/Bilibili-Obsidian-Clipper/releases) 下载对应浏览器的 zip，解压后加载：
+
+| 浏览器 | 包 | 步骤 |
+| --- | --- | --- |
+| Chrome | `*-chrome.zip` | `chrome://extensions/` → 开启开发者模式 → **加载已解压的扩展程序** |
+| Edge | `*-edge.zip` | `edge://extensions/` → 左下角开发人员模式 → **加载解压缩的扩展**（内附 `EDGE-INSTALL.txt`） |
+| Firefox | `*-firefox.zip` | `about:addons` → 齿轮 → 调试附加组件 → **临时加载附加组件** |
+
+> [!TIP]
+> 升级时直接替换扩展目录文件并点「重新加载」，**不要先移除旧扩展**，否则设置、AI 历史和已保存的 Key 会丢失。
+
+## 📖 使用指南
 
 ### 单视频保存
 
-1. 打开任意 B 站视频页并点击扩展图标
-2. 面板会自动抓取并展示字幕
-3. 按需点击 `刷新 / 复制 / 下载 / 保存到 Obsidian`
+1. 打开 B 站视频页，点击扩展图标
+2. 面板自动抓取并展示字幕
+3. `刷新 / 复制 / 下载 / 保存到 Obsidian` 按需操作
 
-### 批量下载合集 / 多 P 字幕
+### 批量下载（合集 / 多 P / 收藏夹）
 
-1. **入口**：在 B 站视频页点击扩展图标 → 「批量下载合集字幕」（会自动带上当前视频链接），或直接打开扩展的 `batch.html` 页面
-2. **粘贴链接** → 点击「解析列表」，勾选需要下载的视频
-
-   支持的链接类型：
+1. 视频页点击扩展图标 → **「批量下载合集字幕」**（自动带上当前链接）
+2. 粘贴链接（支持多行）→ **「解析列表」** → 勾选视频
 
    | 类型 | 示例 |
    | --- | --- |
@@ -103,105 +94,120 @@
    | 番剧 / 课程 | `ep` 或 `ss` 链接 |
    | 收藏夹 | `https://space.bilibili.com/<mid>/favlist?fid=<id>` |
 
-3. **选择选项**：导出格式、字幕语言（默认优先中文，含 AI 字幕）、文件名规则、并发数与请求间隔
-4. **开始抓取**：等待进度完成；无字幕 / 失败的条目可单独重试
-5. **导出**：点击「下载 ZIP」或「写入 Obsidian」
+3. 选择导出格式（SRT / TXT / Markdown）、字幕语言、文件名规则、并发与间隔
+4. **「开始抓取字幕」** → 等待进度完成 → **「下载 ZIP」** 或 **「写入 Obsidian」**
 
-### 稳定性建议
+> [!IMPORTANT]
+> 批量抓取每个视频需要 2 个请求（字幕轨道 + 字幕正文）。
+> 大合集建议 **并发 1–2、间隔 800ms+**；若出现 `-352` / `-412`（风控），调低并发、等待几分钟后点「重试失败项」。66P 规模约需 5–15 分钟。
 
-- 批量抓取每个视频需要 2 个请求（字幕轨道 + 字幕正文），合集量大时建议 **并发 1–2、间隔 800ms+**
-- 若出现「失败」且错误包含 `-352` / `-412`（风控）：调低并发、加大间隔，等几分钟后点「重试失败项」
-- 66P 级别的合集全量抓取约需 5–15 分钟（取决于并发与间隔设置）
+## ⚙️ Obsidian 配置
 
-## Obsidian 配置
+1. Obsidian 社区插件市场安装并启用 `Local REST API with MCP`
+2. 插件设置勾选 `Enable Non-encrypted (HTTP) Server`
+3. 复制 API Key，在扩展设置页填写 `地址`、`API Key`、`笔记目录`
 
-1. 在 Obsidian 社区插件市场安装并启用 `Local REST API with MCP`
-2. 在插件设置中勾选 `Enable Non-encrypted (HTTP) Server`
-3. 复制插件页面里的 API Key
-4. 在扩展设置页填写 `Local REST API 地址`、`API Key`、`笔记目录`
+批量写入路径为 `笔记目录/文件名.md`，同名笔记默认跳过不覆盖。
 
-批量写入时，笔记路径为 `笔记目录/文件名.md`，同名笔记默认跳过（不覆盖）。
+## ❓ FAQ
 
-## 阅读视图（v1.0.18+）
+<details>
+<summary><b>抓取结果显示「无字幕」？</b></summary>
+<br />
 
-沉浸式布局，支持排版调整、主题切换、字幕同步等。
+该视频没有字幕轨（外挂字幕和 AI 字幕都没有）。播放器里没有「字幕」按钮的视频无法获取。
 
-> 稍后再看页面的阅读视图体验尚不完善，推荐在普通视频页使用。
+</details>
 
-## AI 侧边栏（v1.1.0+）
+<details>
+<summary><b>AI 字幕抓不到？</b></summary>
+<br />
 
-支持围绕当前视频字幕进行轻量对话，也可在普通网页中作为通用 AI 对话侧边栏使用。
+AI 字幕需要登录 B 站。请在浏览器登录后重试——扩展完全复用你自己的登录态，不会索要账号密码。
 
-内置历史对话、预设提示词、模型切换等能力，适合快速总结、整理与提炼视频内容。
+</details>
 
-## 项目结构
+<details>
+<summary><b>批量大量「失败」，错误含 <code>-352</code> / <code>-412</code>？</b></summary>
+<br />
 
-- `README.md` / `LICENSE`：项目说明与许可证
-- `extension/`：插件源码
-  - `manifest.json`：MV3 清单（Chrome/Edge 共用，构建时生成 Firefox 变体）
-  - `content.js` / `content.css`：视频页内面板与阅读视图
-  - `popup.html` / `popup.js`：扩展弹窗（含批量下载入口）
-  - `background.js`：后台（字幕抓取、Obsidian 写入、AI 代理、批量任务调度）
-  - `batch-core.js`：批量下载核心（链接解析、合集发现、并发队列、ZIP 打包）
-  - `batch.html` / `batch.js` / `batch.css`：批量下载管理页
-  - `sidepanel.*` / `ai/`：AI 侧边栏
-  - `options.*`：设置页
-- `scripts/build_release.py`：一键构建 Chrome / Edge / Firefox 三平台发布包
-- `release/`：构建产物（本地生成，不入库）
+触发了 B 站风控。并发调到 1、间隔调到 1500ms，等待几分钟后点「重试失败项」。扩展遇到风控时也会自动退避重试并放慢后续请求。
 
-## 开发与构建
+</details>
+
+<details>
+<summary><b>合集里部分视频没有字幕？</b></summary>
+<br />
+
+每个视频独立判断，无字幕条目标黄显示，不影响其他视频导出。
+
+</details>
+
+<details>
+<summary><b>ZIP 里的 <code>00-索引.md</code> 是什么？</b></summary>
+<br />
+
+导出汇总表（序号 / 标题 / BV 号 / 字幕语言 / 文件名），方便在笔记软件里建立检索索引。
+
+</details>
+
+## 🗂 项目结构
+
+<details>
+<summary>展开查看</summary>
+<br />
+
+```
+extension/
+├── manifest.json        # MV3 清单（构建时生成 Firefox 变体）
+├── content.js/.css      # 视频页内面板与阅读视图
+├── popup.html/.js       # 扩展弹窗（含批量下载入口）
+├── background.js        # 后台：字幕抓取、Obsidian 写入、AI 代理、批量调度
+├── batch-core.js        # 批量核心：链接解析、合集发现、并发队列、ZIP 打包
+├── batch.html/.js/.css  # 批量下载管理页
+├── sidepanel.*  ai/     # AI 侧边栏
+└── options.*            # 设置页
+scripts/
+└── build_release.py     # 一键构建 Chrome / Edge / Firefox 发布包
+```
+
+</details>
+
+## 🛠 开发与构建
 
 ```bash
 # 构建三平台发布包（输出到 release/）
 python3 scripts/build_release.py
 ```
 
-- Chrome / Edge 变体：MV3 `service_worker`，核心模块经 `importScripts` 加载
-- Firefox 变体：`background.scripts` + `sidebar_action`，并隐藏播放器 AI 快捷按钮设置
-- 本地调试：直接加载 `extension/` 目录即可，无需构建
+- Chrome / Edge：MV3 `service_worker`，核心模块经 `importScripts` 加载
+- Firefox：`background.scripts` + `sidebar_action`，自动隐藏播放器 AI 快捷按钮设置
+- 本地调试：直接加载 `extension/` 目录，无需构建
 
-## 用自己的 Agent 二次修改
+<details>
+<summary><b>用自己的 AI Agent 二次修改</b></summary>
+<br />
 
-这个项目是开源浏览器扩展，您可以下载源码，让自己的 AI 编程 Agent 按个人工作流修改功能。
+1. `git clone` 或 Download ZIP 下载源码
+2. 用 Cursor / Codex / Claude Code 打开项目文件夹
+3. 描述想要的功能，例如「把默认保存目录改成我的 Obsidian 目录结构」「新增一个 frontmatter 属性」
+4. 在扩展管理页加载 `extension/` 目录，打开 B 站视频页验证
+5. 修改前保留一份原始版本，方便回退
 
-推荐步骤：
+</details>
 
-1. 在 GitHub 页面点击 `Code` → `Download ZIP`，或使用 `git clone` 下载源码
-2. 用 Cursor、Codex、Claude Code 等 AI 编程工具打开项目文件夹
-3. 把想修改的功能描述清楚，例如：
-   - “把默认保存目录改成我的 Obsidian 目录结构”
-   - “新增一个 frontmatter 属性”
-   - “调整 AI 初始问题和保存笔记格式”
-4. 修改完成后，在浏览器扩展管理页选择 `extension/` 文件夹进行本地加载
-5. 打开 B 站视频页测试字幕抓取、AI 对话和 Obsidian 写入是否正常
+## 📄 免责声明
 
-## 常见问题（FAQ）
+> 本工具仅在用户已登录 B 站、且有访问权限的前提下获取数据。所有数据通过用户自己的浏览器和 cookie 获取，**不经过任何第三方服务器**。本工具不存储、不分发任何 B 站内容。使用本工具产生的所有后果由用户自行承担。请遵守 B 站用户协议与相关法律法规。
 
-**Q：抓取结果显示「无字幕」？**
-该视频没有字幕轨（外挂字幕或 AI 字幕都没有）。播放器里没有「字幕」按钮的视频无法获取字幕。
+## 🙏 致谢与支持
 
-**Q：AI 字幕抓不到？**
-AI 字幕需要登录 B 站。请在浏览器登录后重试；扩展完全复用你自己的登录态。
+- 原项目与设计：[haixiong1997/Bilibili-Obsidian-Clipper](https://github.com/haixiong1997/Bilibili-Obsidian-Clipper)
+- 视频教程：[B 站观看](https://www.bilibili.com/video/BV15qQwB4EZ9/)
+- 如果这个项目对你有帮助，欢迎到[原项目](https://github.com/haixiong1997/Bilibili-Obsidian-Clipper)给作者一个 Star 或[微信打赏](docs/images/weixin.jpg)支持
 
-**Q：批量抓取大量「失败」，错误含 `-352` / `-412`？**
-触发了 B 站风控。调低并发到 1、间隔调到 1500ms，等待几分钟后点「重试失败项」。扩展在遇到风控时也会自动退避重试。
+<div align="center">
 
-**Q：合集里部分视频没有字幕？**
-每个视频独立判断，无字幕条目会标黄显示，不影响其他视频导出。
+**MIT License** · Made with ❤️ for Bilibili & Obsidian users
 
-**Q：ZIP 里的 `00-索引.md` 是什么？**
-导出汇总表（序号 / 标题 / BV 号 / 字幕语言 / 文件名），方便在笔记软件里建立索引。
-
-## 视频教程
-
-- [B 站教程](https://www.bilibili.com/video/BV15qQwB4EZ9/?spm_id_from=333.1387.homepage.video_card.click&vd_source=040bc5ea7866b419558ec2682a2ccb59)
-
-## 支持开发者
-
-如果这个项目对您有帮助，欢迎微信打赏支持我的开发工作。您的支持是我持续改进和维护这个项目的动力。
-
-<img src="docs/images/weixin.jpg" alt="微信扫码支持开发者" width="264" />
-
-## 免责声明
-
-> ▎ **用户自负责任条款**：本工具仅在用户已登录 B 站、且有访问权限的前提下获取数据。所有数据通过用户自己的浏览器和 cookie 获取，不经过任何第三方服务器。本工具不存储、不分发任何 B 站内容。使用本工具产生的所有后果由用户自行承担。请遵守 B 站用户协议与相关法律法规。
+</div>
