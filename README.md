@@ -12,7 +12,7 @@
 [![License](https://img.shields.io/github/license/haixiong1997/Bilibili-Obsidian-Clipper?style=for-the-badge&label=License)](./LICENSE)
 [![Manifest V3](https://img.shields.io/badge/Manifest-V3-8a70f5?style=for-the-badge)](./extension/manifest.json)
 
-**安装**：[Chrome 商店](https://chromewebstore.google.com/detail/jokophbofiphenlplmohabdcmalcbenl) · [Edge 商店](https://microsoftedge.microsoft.com/addons/detail/fbeeapnjdjgacilaobonekidbfjcmdjo) · [Firefox 商店](https://addons.mozilla.org/addon/bilibili-obsidian-clipper/) · [离线包 ⬇](#-快速开始)
+**安装**：[离线包 ⬇](#-快速开始)
 
 </div>
 
@@ -51,17 +51,7 @@
 
 ## 🚀 快速开始
 
-### 方式一：插件商店（推荐）
-
-<div align="center">
-
-[<img src="https://img.shields.io/badge/Chrome-商店-4285F4?logo=googlechrome&logoColor=white" height="34">](https://chromewebstore.google.com/detail/jokophbofiphenlplmohabdcmalcbenl)
-[<img src="https://img.shields.io/badge/Edge-商店-0078D7?logo=microsoftedge&logoColor=white" height="34">](https://microsoftedge.microsoft.com/addons/detail/fbeeapnjdjgacilaobonekidbfjcmdjo)
-[<img src="https://img.shields.io/badge/Firefox-商店-FF7139?logo=firefoxbrowser&logoColor=white" height="34">](https://addons.mozilla.org/addon/bilibili-obsidian-clipper/)
-
-</div>
-
-### 方式二：离线包（开发者模式加载）
+### 安装步骤（开发者模式加载）
 
 从 [Releases](https://github.com/jangviktor-web/Bilibili-Obsidian-Clipper/releases) 下载对应浏览器的 zip，解压后加载：
 
@@ -200,11 +190,9 @@ python3 scripts/build_release.py
 
 > 本工具仅在用户已登录 B 站、且有访问权限的前提下获取数据。所有数据通过用户自己的浏览器和 cookie 获取，**不经过任何第三方服务器**。本工具不存储、不分发任何 B 站内容。使用本工具产生的所有后果由用户自行承担。请遵守 B 站用户协议与相关法律法规。
 
-## 🙏 致谢与支持
+## 🙏 致谢
 
-- 原项目与设计：[haixiong1997/Bilibili-Obsidian-Clipper](https://github.com/haixiong1997/Bilibili-Obsidian-Clipper)
-- 视频教程：[B 站观看](https://www.bilibili.com/video/BV15qQwB4EZ9/)
-- 如果这个项目对你有帮助，欢迎到[原项目](https://github.com/haixiong1997/Bilibili-Obsidian-Clipper)给作者一个 Star 或[微信打赏](docs/images/weixin.jpg)支持
+- 原项目与设计：[haixiong1997/Bilibili-Obsidian-Clipper](https://github.com/haixiong1997/Bilibili-Obsidian-Clipper)，欢迎给作者一个 Star
 
 <div align="center">
 
