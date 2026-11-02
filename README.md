@@ -9,11 +9,12 @@
 
 [![Release](https://img.shields.io/github/v/release/jangviktor-web/Bilibili-Obsidian-Clipper?style=for-the-badge&label=%E4%B8%8B%E8%BD%BD)](https://github.com/jangviktor-web/Bilibili-Obsidian-Clipper/releases)
 [![Edge Add-ons](https://img.shields.io/badge/Edge%20Add--ons-下载-1b6fdc?style=for-the-badge&logo=microsoftedge&logoColor=white)](https://microsoftedge.microsoft.com/addons/detail/eabboinngmlnlleoideobkjklmdfllka)
+[![Firefox Add-ons](https://img.shields.io/badge/Firefox%20Add--ons-下载-ff7139?style=for-the-badge&logo=firefoxbrowser&logoColor=white)](https://addons.mozilla.org/zh-CN/firefox/addon/bili-subtitle-downloader/)
 [![Chrome Web Store users](https://img.shields.io/chrome-web-store/users/jokophbofiphenlplmohabdcmalcbenl?style=for-the-badge&logo=googlechrome&logoColor=white&label=Chrome%E7%94%A8%E6%88%B7)](https://chromewebstore.google.com/detail/jokophbofiphenlplmohabdcmalcbenl)
 [![License](https://img.shields.io/github/license/haixiong1997/Bilibili-Obsidian-Clipper?style=for-the-badge&label=License)](./LICENSE)
 [![Manifest V3](https://img.shields.io/badge/Manifest-V3-8a70f5?style=for-the-badge)](./extension/manifest.json)
 
-**安装**：[Edge 商店 ⬇](https://microsoftedge.microsoft.com/addons/detail/eabboinngmlnlleoideobkjklmdfllka) · [离线包 ⬇](#-快速开始)
+**安装**：[Edge 商店 ⬇](https://microsoftedge.microsoft.com/addons/detail/eabboinngmlnlleoideobkjklmdfllka) · [Firefox 商店 ⬇](https://addons.mozilla.org/zh-CN/firefox/addon/bili-subtitle-downloader/) · [离线包 ⬇](#-快速开始)
 
 </div>
 
@@ -59,12 +60,13 @@
 | 浏览器 | 包 | 步骤 |
 | --- | --- | --- |
 | Edge | [商店安装 ⬇](https://microsoftedge.microsoft.com/addons/detail/eabboinngmlnlleoideobkjklmdfllka) | Microsoft Edge 加载项商店一键安装，无需开发者模式 |
+| Firefox | [商店安装 ⬇](https://addons.mozilla.org/zh-CN/firefox/addon/bili-subtitle-downloader/) | Firefox 附加组件商店一键安装，自动更新 |
 | Edge（离线） | `*-edge.zip` | `edge://extensions/` → 左下角开发人员模式 → **加载解压缩的扩展**（内附 `EDGE-INSTALL.txt`） |
 | Chrome | `*-chrome.zip` | `chrome://extensions/` → 开启开发者模式 → **加载已解压的扩展程序** |
-| Firefox | `*-firefox.zip` | `about:addons` → 齿轮 → 调试附加组件 → **临时加载附加组件** |
+| Firefox（离线） | `*-firefox.zip` | `about:addons` → 齿轮 → 调试附加组件 → **临时加载附加组件** |
 
 > [!TIP]
-> Edge 用户推荐走 [Microsoft Edge 加载项商店](https://microsoftedge.microsoft.com/addons/detail/eabboinngmlnlleoideobkjklmdfllka) 安装，自动更新、免开发者模式。升级时直接替换扩展目录文件并点「重新加载」，**不要先移除旧扩展**，否则设置、AI 历史和已保存的 Key 会丢失。
+> Edge 用户推荐走 [Microsoft Edge 加载项商店](https://microsoftedge.microsoft.com/addons/detail/eabboinngmlnlleoideobkjklmdfllka) 安装，Firefox 用户走 [Firefox 附加组件商店](https://addons.mozilla.org/zh-CN/firefox/addon/bili-subtitle-downloader/)，均自动更新、免开发者模式。升级时直接替换扩展目录文件并点「重新加载」，**不要先移除旧扩展**，否则设置、AI 历史和已保存的 Key 会丢失。
 
 ## 📖 使用指南
 
