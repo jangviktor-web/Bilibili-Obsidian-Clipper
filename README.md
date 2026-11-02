@@ -1,6 +1,6 @@
 <div align="center">
 
-# 📺 Bilibili Obsidian Clipper
+# 📺 bili-subtitle-downloader
 
 **在 B 站视频页抓取字幕 · 一键保存到 Obsidian · 整季合集批量下载**
 
